@@ -45,11 +45,39 @@ console.log(validateCred([4,5,3,9,6,8,9,8,8,7,7,0,5,7,9,8]));
 
 const findInvalidCards = (nestedArray) => {
     let nestedResults = [];
-    nestedArray.forEach(item=> nestedResults.push([validateCred(item)]));
+    nestedArray.forEach(item=> {
+        if(!validateCred(item)){
+            nestedResults.push(item);
+        }
+    });
     return nestedResults;
 };
 
 console.log(findInvalidCards(batch));
 
 
+const idInvalidCardCompanies = (nestedArray) => {
+    let arrayOfBadCompanies = [];
+    nestedArray.forEach(arr => {
+        switch(arr[0]){
+            case 3:
+                arrayOfBadCompanies.some(item => item === 'Amex')? null: arrayOfBadCompanies.push('Amex');
+                break;
+            case 4:
+                arrayOfBadCompanies.some(item=>item === 'Visa')? null: arrayOfBadCompanies.push('Visa');
+                break;
+            case 5:
+                arrayOfBadCompanies.some(item=>item === 'Mastercard')? null: arrayOfBadCompanies.push('Mastercard');
+                break;
+            case 6:
+                arrayOfBadCompanies.some(item=>item === 'Discover')? null: arrayOfBadCompanies.push('Discover');
+                break;
+            default:
+                arrayOfBadCompanies.some(item=>item === 'Company unknown')? null: arrayOfBadCompanies.push('Company unknown');
+        }
+    });
+    return arrayOfBadCompanies;
+};
 
+
+console.log(idInvalidCardCompanies(findInvalidCards(batch)));
