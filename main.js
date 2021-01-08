@@ -25,8 +25,8 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 // function for checking if credit card number is valid //
 
 const validateCred = (arr) => {
-    arr = arr.reverse();
-    let creditArr = arr.map((num, index) => {
+    let newArr = [...arr].reverse();
+    let creditArr = newArr.map((num, index) => {
         if(index > 0 && index % 2 !== 0){
             let number = num * 2;
             if (number > 9){
@@ -37,7 +37,6 @@ const validateCred = (arr) => {
             return num;
         }
     });
-    console.log(creditArr);
     let sum = creditArr.reduce((acc, cur)=>acc + cur,0);
     return sum % 2 === 0;
 };
